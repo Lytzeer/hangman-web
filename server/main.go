@@ -34,9 +34,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	variable := r.Form.Get("input")
 	//fmt.Println(variable)
 	tab := []string{}
-	tab = append(tab, "e")
-	tab = append(tab, "e")
-	tab = append(tab, "e")
+	tab = append(tab, "let")
 	tmpl := template.Must(template.ParseFiles("./static/index.html"))
 	data := Hangman{
 		Letter:    variable,
