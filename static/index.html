@@ -11,6 +11,10 @@
         <input type="submit" value="Entrer" />
  </form>
 
- Valeur: {{ .Letter }}
+    {{ range .NbLetters }}
+    <p>{{ . }}
+    {{ end }}
+
+    {{ .NbLetters }}
 </body>
 </html>

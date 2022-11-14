@@ -6,11 +6,13 @@ import (
 	"net/http"
 )
 
-type Test struct {
-	Letter string
+type Hangman struct {
+	Letter    string
+	NbLetters []string
 }
 
 func main() {
+	fmt.Println("Starting server on port 8080")
 	http.HandleFunc("/", Handler)
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
@@ -31,10 +33,14 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	// Récupérez votre valeur
 	variable := r.Form.Get("input")
 	//fmt.Println(variable)
-
+	tab := []string{}
+	tab = append(tab, "e")
+	tab = append(tab, "e")
+	tab = append(tab, "e")
 	tmpl := template.Must(template.ParseFiles("./static/index.html"))
-	data := Test{
-		Letter: variable,
+	data := Hangman{
+		Letter:    variable,
+		NbLetters: tab,
 	}
 	fmt.Println(data)
 	tmpl.Execute(w, data)
