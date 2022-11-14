@@ -26,8 +26,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 	tmpl.Execute(w, data)
 	switch r.Method {
-	case "GET":
-		fmt.Println("GET")
 	case "POST": // Gestion d'erreur
 		if err := r.ParseForm(); err != nil {
 			return
