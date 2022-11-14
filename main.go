@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -15,4 +16,7 @@ func main() {
 
 func Handler(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
+	v := r.FormValue("input")
+	fmt.Println(v)
+
 }
