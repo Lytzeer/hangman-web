@@ -11,8 +11,19 @@
         <input type="submit" value="Entrer" />
  </form>
 
- {{ range .MotTab }}
- <p>{{ . }}
-    {{ end }}
+ <style>
+	p.style {
+		color: blue;
+        text-align: center;
+        font-size: 200px;
+        letter-spacing: 50px;
+	}
+</style>
+
+
+ <p class="style">
+    {{ .Motstr }}
+
+ </p>
 </body>
 </html>
