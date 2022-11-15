@@ -4,10 +4,12 @@
 }
 
 body{
-    background-image: url(pics/hangman.jpg);
-    background-repeat: no-repeat;
-    background-size:cover;
+  background-color: #0A0B0B;
+  background-image: url(pics/snap.png);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
 :active, :hover, :focus {
   outline: 0!important;
   outline-offset: 0;
