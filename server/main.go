@@ -44,10 +44,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("./static/index.html"))
 	data.Letter = variable
 	//data.LettersUsed = append(data.LettersUsed, variable)
-	fmt.Println(data.MotTab)
+	fmt.Println(data.Motstr)
 	tmpl.Execute(w, data)
 	a, b := hc.IsInputOk(data.Letter, data.Mot, data.Motstr, &data.LettersUsed)
-	fmt.Println(a)
+	data.Motstr = a
+	fmt.Println(data.Mot)
 	fmt.Println(b)
 	return
 }
