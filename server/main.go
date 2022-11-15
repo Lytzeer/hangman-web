@@ -19,7 +19,9 @@ func main() {
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 	http.HandleFunc("/hangman", Handler)
+	fmt.Println("cc")
 	http.ListenAndServe(":8080", nil)
+	return
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +54,7 @@ func HangmanWeb() {
 	}
 	if data.Mot == data.Motstr {
 		fmt.Println("gg")
-		os.Exit(1)
+		return
 	}
 }
 
@@ -64,3 +66,5 @@ func LetterPresent(letter string) bool {
 	}
 	return false
 }
+
+//Pour la carte d'identité faut rediriger depuis la fonction handler vers /http.HandleFunc("/hangman", Handler)

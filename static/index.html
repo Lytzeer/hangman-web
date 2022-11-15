@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
+    
     <title>Hangman Web</title>
 </head>
 <body>
@@ -13,10 +14,7 @@
           <span>Play !</span>
         </button></a>
     </div>
-    <form method="post" action="/hangman">
-        <input id="inputBox" name="input" type="text"/>
-        <input type="submit" value="Entrer" />
- </form>
+
 
  <style>
 	p.style {
@@ -31,18 +29,10 @@
  <p class="style">
     {{ .Motstr }}
 
- </p>
-
- <p class="style">
-    {{ .Attempts }}
-
- </p>
-
- <p class="style">
-    {{ .LettersUsed }}
-
- </p>
-
- 
+ </p> 
+ <form method="post" action="/hangman">
+    <input id="inputBox" name="input" type="text"/>
+    <input type="submit" value="Entrer" />
+</form>
 </body>
 </html>
