@@ -44,7 +44,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	data.LettersUsed = append(data.LettersUsed, variable)
 	fmt.Println(data)
 	tmpl.Execute(w, data)
-	hc.IsInputOk(data.Letter, hw.TabtoStr(data.Mot))
+	hc.IsInputOk(data.Letter, hw.TabtoStr(data.MotTab), data.Mot, &data.LettersUsed)
 }
 
 func SetData(data *Hangman, letter string) {
