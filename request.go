@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func Initword(filename string) ([]string, string) {
+func Initword(filename string) ([]string, string, string) {
 	data, err := ioutil.ReadFile(filename)
 	if err != nil {
 		log.Fatalf("unable to read file: %v", err)
@@ -36,7 +36,7 @@ func Initword(filename string) ([]string, string) {
 		randomwordhidetab = append(randomwordhidetab, string(randomwordhide[i]))
 	}
 
-	return randomwordhidetab, randomword
+	return randomwordhidetab, randomword, randomwordhide
 
 }
 func TabtoStr(tab []string) string {

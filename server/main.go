@@ -12,6 +12,7 @@ import (
 type Hangman struct {
 	Letter      string
 	MotTab      []string
+	Motstr      string
 	Mot         string
 	Attempts    int
 	LettersUsed []string
@@ -20,7 +21,7 @@ type Hangman struct {
 var data Hangman
 
 func main() {
-	data.MotTab, data.Mot = hw.Initword(os.Args[len(os.Args)-1])
+	data.MotTab, data.Mot, data.Motstr = hw.Initword(os.Args[len(os.Args)-1])
 	fmt.Println("Starting server on port 8080")
 	http.HandleFunc("/", Handler)
 	fs := http.FileServer(http.Dir("./static"))
@@ -41,12 +42,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println(variable)
 	tmpl := template.Must(template.ParseFiles("./static/index.html"))
 	data.Letter = variable
-	data.LettersUsed = append(data.LettersUsed, variable)
-	fmt.Println(data)
+	//data.LettersUsed = append(data.LettersUsed, variable)
+	fmt.Println(data.MotTab)
 	tmpl.Execute(w, data)
-	hc.IsInputOk(data.Letter, hw.TabtoStr(data.MotTab), data.Mot, &data.LettersUsed)
-}
-
-func SetData(data *Hangman, letter string) {
-	data.Letter = letter
+	fmt.Println(hc.IsInputOk(data.Letter, hw.TabtoStr(data.MotTab), data.Mot, &data.LettersUsed))
 }
