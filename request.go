@@ -37,6 +37,8 @@ func Initword(filename string) ([]string, string, string) {
 		randomwordhidetab = append(randomwordhidetab, string(randomwordhide[i]))
 	}
 
+	randomword = randomword[:(len(randomword) - 1)]
+
 	return randomwordhidetab, randomword, randomwordhide
 
 }

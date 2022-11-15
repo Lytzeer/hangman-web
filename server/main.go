@@ -48,8 +48,10 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	a, b := hc.IsInputOk(data.Letter, data.Mot, data.Motstr, &data.LettersUsed)
 	data.Motstr = a
 	fmt.Println(b)
-	fmt.Println(data.Mot)
-	fmt.Println(data.Motstr == data.Mot)
+	if data.Mot == data.Motstr {
+		fmt.Println("gg")
+		return
+	}
 	tmpl.Execute(w, data)
 	return
 }
