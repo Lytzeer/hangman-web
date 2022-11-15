@@ -45,10 +45,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	data.Letter = variable
 	//data.LettersUsed = append(data.LettersUsed, variable)
 	fmt.Println(data.Motstr)
-	tmpl.Execute(w, data)
 	a, b := hc.IsInputOk(data.Letter, data.Mot, data.Motstr, &data.LettersUsed)
 	data.Motstr = a
-	fmt.Println(data.Mot)
 	fmt.Println(b)
+	fmt.Println(data.Mot)
+	fmt.Println(data.Motstr == data.Mot)
+	tmpl.Execute(w, data)
 	return
 }

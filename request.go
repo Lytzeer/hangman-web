@@ -31,6 +31,7 @@ func Initword(filename string) ([]string, string, string) {
 	randomword := list[rand.Intn(len(list))]
 
 	randomwordhide := hc.CreateWord(randomword)
+	randomwordhide = randomwordhide[:(len(randomwordhide) - 1)]
 	randomwordhidetab := []string{}
 	for i := 0; i < len(randomwordhide)-1; i++ {
 		randomwordhidetab = append(randomwordhidetab, string(randomwordhide[i]))
