@@ -22,6 +22,7 @@ var data Hangman
 
 func main() {
 	data.MotTab, data.Mot, data.Motstr = hw.Initword(os.Args[len(os.Args)-1])
+	data.Attempts = 10
 	fmt.Println("Starting server on port 8080")
 	http.HandleFunc("/", Handler)
 	fs := http.FileServer(http.Dir("./static"))
@@ -45,5 +46,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	//data.LettersUsed = append(data.LettersUsed, variable)
 	fmt.Println(data.MotTab)
 	tmpl.Execute(w, data)
-	fmt.Println(hc.IsInputOk(data.Letter, hw.TabtoStr(data.MotTab), data.Mot, &data.LettersUsed))
+	a, b := hc.IsInputOk(data.Letter, data.Mot, data.Motstr, &data.LettersUsed)
+	fmt.Println(a)
+	fmt.Println(b)
+	return
 }
