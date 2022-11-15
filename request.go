@@ -8,6 +8,15 @@ import (
 	"time"
 )
 
+type Hangman struct {
+	Letter      string
+	MotTab      []string
+	Motstr      string
+	Mot         string
+	Attempts    int
+	LettersUsed []string
+}
+
 func Initword(filename string) ([]string, string, string) {
 	data, err := ioutil.ReadFile(filename)
 	if err != nil {

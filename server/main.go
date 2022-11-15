@@ -9,16 +9,7 @@ import (
 	"os"
 )
 
-type Hangman struct {
-	Letter      string
-	MotTab      []string
-	Motstr      string
-	Mot         string
-	Attempts    int
-	LettersUsed []string
-}
-
-var data Hangman
+var data hw.Hangman
 
 func main() {
 	data.MotTab, data.Mot, data.Motstr = hw.Initword(os.Args[len(os.Args)-1])
@@ -45,13 +36,31 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	data.Letter = variable
 	//data.LettersUsed = append(data.LettersUsed, variable)
 	fmt.Println(data.Motstr)
-	a, b := hc.IsInputOk(data.Letter, data.Mot, data.Motstr, &data.LettersUsed)
-	data.Motstr = a
-	fmt.Println(b)
-	if data.Mot == data.Motstr {
-		fmt.Println("gg")
-		return
-	}
+	HangmanWeb()
 	tmpl.Execute(w, data)
 	return
+}
+
+func HangmanWeb() {
+	Motstr, State := hc.IsInputOk(data.Letter, data.Mot, data.Motstr, &data.LettersUsed)
+	data.Motstr = Motstr
+	if !(LetterPresent(data.Letter)) {
+		data.LettersUsed = append(data.LettersUsed, data.Letter)
+	}
+	if State == "fail" {
+		data.Attempts--
+	}
+	if data.Mot == data.Motstr {
+		fmt.Println("gg")
+		os.Exit(1)
+	}
+}
+
+func LetterPresent(letter string) bool {
+	for _, ch := range data.LettersUsed {
+		if data.Letter == ch {
+			return true
+		}
+	}
+	return false
 }
