@@ -25,8 +25,16 @@ func main() {
 }
 
 func HandleIndex(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("./static/index.html"))
-	tmpl.Execute(w, nil)
+	if data.Username == "" {
+		http.Redirect(w, r, "/user", 302)
+	}
+	var tmpl *template.Template
+	if data.Win {
+		tmpl = template.Must(template.ParseFiles("./static/win.html"))
+	} else {
+		tmpl = template.Must(template.ParseFiles("./static/play.html"))
+	}
+	tmpl.Execute(w, data)
 	return
 }
 
@@ -36,17 +44,23 @@ func HandlerUser(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+func HandlerWin(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("./static/win.html"))
+	tmpl.Execute(w, nil)
+	return
+}
+
 func Handler(w http.ResponseWriter, r *http.Request) {
-	switch r.Method {
-	case "POST": // Gestion d'erreur
-		if err := r.ParseForm(); err != nil {
-			return
-		}
-	}
+	// switch r.Method {
+	// case "POST": // Gestion d'erreur
+	// 	if err := r.ParseForm(); err != nil {
+	// 		return
+	// 	}
+	// }
 	// Récupérez votre valeur
 	variable := r.FormValue("input")
 	//fmt.Println(variable)
-	tmpl := template.Must(template.ParseFiles("./static/play.html"))
+	// tmpl := template.Must(template.ParseFiles("./static/play.html"))
 	if data.Username == "" {
 		data.Username = variable
 		fmt.Println(data.Username)
@@ -57,8 +71,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	//data.LettersUsed = append(data.LettersUsed, variable)
 	fmt.Println(data.Motstr)
 	HangmanWeb()
-	tmpl.Execute(w, data)
-	return
+	// tmpl.Execute(w, data)
+	http.Redirect(w, r, "/", 302)
 }
 
 func HangmanWeb() {
@@ -71,8 +85,7 @@ func HangmanWeb() {
 		data.Attempts--
 	}
 	if data.Mot == data.Motstr {
-		fmt.Println("gg")
-		return
+		data.Win = true
 	}
 }
 
