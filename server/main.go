@@ -6,13 +6,12 @@ import (
 	hc "hangmanweb/hangman-classic"
 	"html/template"
 	"net/http"
-	"os"
 )
 
 var data hw.Hangman
 
 func main() {
-	data.MotTab, data.Mot, data.Motstr = hw.Initword(os.Args[len(os.Args)-1])
+	data.MotTab, data.Mot, data.Motstr = hw.Initword()
 	data.Attempts = 10
 	fmt.Println("Starting server on port 8080")
 	http.HandleFunc("/", HandleIndex)
