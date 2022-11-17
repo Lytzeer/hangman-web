@@ -11,13 +11,13 @@ import (
 var data hw.Hangman
 
 func main() {
-	data.MotTab, data.Mot, data.Motstr = hw.Initword()
-	data.Attempts = 10
 	fmt.Println("Starting server on port 8080")
 	http.HandleFunc("/", HandleIndex)
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 	http.HandleFunc("/user", HandlerUser)
+	http.HandleFunc("/win", HandleIndex)
+	http.HandleFunc("/loose", HandleIndex)
 	http.HandleFunc("/hangman", Handler)
 	http.ListenAndServe(":8080", nil)
 	return
@@ -25,13 +25,24 @@ func main() {
 
 func HandleIndex(w http.ResponseWriter, r *http.Request) {
 	if data.Username == "" {
+		data.MotTab, data.Mot, data.Motstr = hw.Initword()
+		data.Attempts = 10
 		http.Redirect(w, r, "/user", 302)
 	}
 	var tmpl *template.Template
 	if data.Win {
 		tmpl = template.Must(template.ParseFiles("./static/win.html"))
+		data.MotTab, data.Mot, data.Motstr = hw.Initword()
+		data.Attempts = 10
+		data.Win = false
+		fmt.Println(data.Mot)
+		fmt.Println(data.Attempts)
 	} else if data.Attempts == 0 {
 		tmpl = template.Must(template.ParseFiles("./static/loose.html"))
+		data.MotTab, data.Mot, data.Motstr = hw.Initword()
+		data.Attempts = 10
+		fmt.Println(data.Mot)
+		fmt.Println(data.Attempts)
 	} else {
 		tmpl = template.Must(template.ParseFiles("./static/play.html"))
 	}
@@ -60,6 +71,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	// }
 	// Récupérez votre valeur
 	variable := r.FormValue("input")
+	fmt.Println(data.Mot)
 	//fmt.Println(variable)
 	// tmpl := template.Must(template.ParseFiles("./static/play.html"))
 	if data.Username == "" {
