@@ -9,6 +9,7 @@ import (
 )
 
 type Hangman struct {
+	Username    string
 	Letter      string
 	MotTab      []string
 	Motstr      string

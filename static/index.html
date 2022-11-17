@@ -4,30 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
-    
-    <title>Hangman Web</title>
+    <link rel="stylesheet" href="style_user.css">
+    <title>Play</title>
 </head>
 <body>
-
-
- <style>
-	p.style {
-		color: #1F271B;
-        text-align: center;
-        font-size: 14rem;
-        letter-spacing: 1rem;
-	}
-</style>
-
-
- <p class="style">
-    {{ .Motstr }}
-
- </p> 
- <form method="post" action="/hangman">
-    <input id="inputBox" name="input" type="text"/>
-    <input type="submit" value="Entrer" />
-</form>
+    <form method="post" action="/hangman">
+        <input id="inputBox" name="input" type="text" placeholder="Entrez un nom d'utilisateur"/>
+        <input type="submit" value="Entrer" />
+    </form>
 </body>
 </html>
