@@ -31,6 +31,8 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 	var tmpl *template.Template
 	if data.Win {
 		tmpl = template.Must(template.ParseFiles("./static/win.html"))
+	} else if data.Attempts == 0 {
+		tmpl = template.Must(template.ParseFiles("./static/loose.html"))
 	} else {
 		tmpl = template.Must(template.ParseFiles("./static/play.html"))
 	}
