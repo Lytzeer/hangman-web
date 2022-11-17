@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style_user.css">
+    <link rel="stylesheet" href="/static/style_user.css">
     <title>Play</title>
 </head>
 <body>
+    <h1>Register</h1>
     <form method="post" action="/hangman">
-        <input id="inputBox" name="input" type="text" placeholder="Entrez un nom d'utilisateur"/>
-        <input type="submit" value="Entrer" />
+        <div class="wrapper">
+            <input name="input" type="text" required >
+            <label for="input">
+                <span>
+                    Username
+                </span>
+            </label>
+        </div>
+        <div class='btn-holder'>
+            <button class="btn btn-3 hover-border-1" type="submit">
+                <span>Submit</span>
+            </button>
+        </div>
     </form>
 </body>
 </html>

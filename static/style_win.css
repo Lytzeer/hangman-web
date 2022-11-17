@@ -72,13 +72,13 @@ body{
 }
 .btn.hover-border-1::before {
   top: 0; left: 0;
-  border-left: 1px solid white;
-  border-top: 1px solid white;
+  border-left: 1px solid #FFBF00;
+  border-top: 1px solid #FFBF00;
 }
 .btn.hover-border-1::after {
   bottom: 0; right: 0;
-  border-right: 1px solid white;
-  border-bottom: 1px solid white;
+  border-right: 1px solid #FFBF00;
+  border-bottom: 1px solid #FFBF00;
 }
 .btn.hover-border-1:hover::before,
 .btn.hover-border-1:hover::after {

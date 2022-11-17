@@ -45,7 +45,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 	// Récupérez votre valeur
 	variable := r.FormValue("input")
-	fmt.Println("heere" + variable)
 	//fmt.Println(variable)
 	tmpl := template.Must(template.ParseFiles("./static/play.html"))
 	if data.Username == "" {
