@@ -6,6 +6,14 @@
   body{
     background-color: #81968F;
   }
+
+  img{
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left:0;
+    top:0;
+  }
   
   h1{
     color: #1F271B;
