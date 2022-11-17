@@ -19,8 +19,8 @@ type Hangman struct {
 	Win         bool
 }
 
-func Initword(filename string) ([]string, string, string) {
-	data, err := ioutil.ReadFile(filename)
+func Initword() ([]string, string, string) {
+	data, err := ioutil.ReadFile("./hangman-classic/main/words.txt")
 	if err != nil {
 		log.Fatalf("unable to read file: %v", err)
 	}
