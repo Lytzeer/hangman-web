@@ -32,7 +32,7 @@
     position: absolute;
     content: "";
   }
-  
+
   .btn-holder,.wrapper,h1 {
     display: flex;
     flex-wrap: wrap;

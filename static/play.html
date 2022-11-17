@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style_play.css">
-    <link rel="shortcut icon" type="image/png" href="pics/fav_icon.png"/>
+    <link rel="shortcut icon" type="image/png" href="/static/pics/fav_icon.png"/>
     <title>Hangman Web</title>
 </head>
 <body>
-    <img src="/static/pics/1.png" >
-    <!-- <img src="/static/pics/2.png" >
+    <!-- <img src="/static/pics/1.png" >
+    <img src="/static/pics/2.png" >
     <img src="/static/pics/3.png" >
     <img src="/static/pics/4.png" >
     <img src="/static/pics/5.png" >
@@ -23,6 +23,7 @@
     {{ .Motstr }}
 
  </h1>
+ 
 
  <form method="post" action="/hangman">
     <div class="wrapper">
@@ -34,6 +35,11 @@
         </label>
     </div>
 </form>
+<div class='btn-holder'>
+    <a href="/play" target=""><button class="btn btn-3 hover-border-1">
+      <span>Reset</span>
+    </button></a>
+</div>
     <div class="footer">Mathéo LANG | Timothée DURAN | Lucas HANSON | Lukas PORTIER</div>
 </body>
 </html>
