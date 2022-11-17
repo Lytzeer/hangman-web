@@ -85,3 +85,14 @@ body{
   width: 99%;
   height: 98%;
 }
+
+.footer {
+  color: wheat;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #1F271B;
+  text-align: center;
+}
