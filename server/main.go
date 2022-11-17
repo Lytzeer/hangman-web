@@ -15,32 +15,23 @@ func main() {
 	data.MotTab, data.Mot, data.Motstr = hw.Initword(os.Args[len(os.Args)-1])
 	data.Attempts = 10
 	fmt.Println("Starting server on port 8080")
-	http.HandleFunc("/", HandlerUser)
+	http.HandleFunc("/", HandleIndex)
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	http.HandleFunc("/user", HandlerUser)
 	http.HandleFunc("/hangman", Handler)
 	http.ListenAndServe(":8080", nil)
 	return
 }
 
-func HandlerUser(w http.ResponseWriter, r *http.Request) {
-	// switch r.Method {
-	// case "POST": // Gestion d'erreur
-	// 	if err := r.ParseForm(); err != nil {
-	// 		return
-	// 	}
-	// }
-	// fmt.Println("HEEEEEEEEEEEEEEEERE")
-	// // Récupérez votre valeur
-	// username := r.FormValue("inputBox")
-	// //username := r.Form.Get("inputBox")
-	// fmt.Println(username)
-	// //fmt.Println(variable)
+func HandleIndex(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("./static/index.html"))
-	// data.Username = username
-	// fmt.Println(data.Username)
-	//data.LettersUsed = append(data.LettersUsed, variable)
-	//fmt.Println(data)
+	tmpl.Execute(w, nil)
+	return
+}
+
+func HandlerUser(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("./static/user.html"))
 	tmpl.Execute(w, nil)
 	return
 }
