@@ -17,6 +17,8 @@ type Hangman struct {
 	Attempts    int
 	LettersUsed []string
 	Win         bool
+	Hang        string
+	Tries       int
 }
 
 func Initword() ([]string, string, string) {

@@ -35,17 +35,43 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 		data.MotTab, data.Mot, data.Motstr = hw.Initword()
 		data.Attempts = 10
 		data.Win = false
+		data.LettersUsed = []string{}
 		fmt.Println(data.Mot)
 		fmt.Println(data.Attempts)
 	} else if data.Attempts == 0 {
 		tmpl = template.Must(template.ParseFiles("./static/loose.html"))
 		data.MotTab, data.Mot, data.Motstr = hw.Initword()
 		data.Attempts = 10
+		data.LettersUsed = []string{}
 		fmt.Println(data.Mot)
 		fmt.Println(data.Attempts)
 	} else {
 		tmpl = template.Must(template.ParseFiles("./static/play.html"))
 	}
+	hang := ""
+	switch data.Attempts {
+	case 1:
+		hang = "/static/pics/9.png"
+	case 2:
+		hang = "/static/pics/8.png"
+	case 3:
+		hang = "/static/pics/7.png"
+	case 4:
+		hang = "/static/pics/6.png"
+	case 5:
+		hang = "/static/pics/5.png"
+	case 6:
+		hang = "/static/pics/4.png"
+	case 7:
+		hang = "/static/pics/3.png"
+	case 8:
+		hang = "/static/pics/2.png"
+	case 9:
+		hang = "/static/pics/1.png"
+	case 10:
+		hang = "/static/pics/11.png"
+	}
+	data.Hang = hang
 	tmpl.Execute(w, data)
 	return
 }
@@ -79,6 +105,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(data.Username)
 	} else {
 		data.Letter = variable
+		data.Tries++
 		fmt.Println(data.Username)
 	}
 	//data.LettersUsed = append(data.LettersUsed, variable)
@@ -91,13 +118,16 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 func HangmanWeb() {
 	Motstr, State := hc.IsInputOk(data.Letter, data.Mot, data.Motstr, &data.LettersUsed)
 	data.Motstr = Motstr
+	if State == "wordwrong" || State == "wordinvalid" {
+		data.Attempts -= 2
+	}
 	if !(LetterPresent(data.Letter)) {
 		data.LettersUsed = append(data.LettersUsed, data.Letter)
 	}
 	if State == "fail" {
 		data.Attempts--
 	}
-	if data.Mot == data.Motstr {
+	if data.Mot == data.Motstr || State == "wordgood" {
 		data.Win = true
 	}
 }
