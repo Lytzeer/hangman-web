@@ -8,10 +8,11 @@ body{
 }
 
 h1{
-  color: #1F271B;
+  color: wheat;
   font-size: 14rem;
   font-weight: bold;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-shadow: 14px 14px 0px #1F271B;
 }
 
 :active, :hover, :focus {

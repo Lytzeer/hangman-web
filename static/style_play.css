@@ -21,11 +21,12 @@
   }
   
   .word{
-    color: #1F271B;
+    color: wheat;
     font-size: 9.5rem;
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     letter-spacing: 1rem;
+    text-shadow: 8px 8px 0px #1F271B;
   }
 
   .scoreboard{
