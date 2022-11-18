@@ -68,7 +68,7 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 	case 8:
 		hang = "/static/pics/2.png"
 	case 9:
-		hang = "/static/pics/1.png"
+		hang = "/static/pics/111.png"
 	case 10:
 		hang = "/static/pics/11.png"
 	}
