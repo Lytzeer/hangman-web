@@ -1,10 +1,12 @@
 package hangmanweb
 
 import (
+	"encoding/json"
 	hc "hangmanweb/hangman-classic"
 	"io/ioutil"
 	"log"
 	"math/rand"
+	"os"
 	"time"
 )
 
@@ -20,6 +22,13 @@ type Hangman struct {
 	Win            bool
 	Hang           string
 	Tries          int
+}
+
+type DataHangman struct {
+	Username string
+	Mot      string
+	Tries    int
+	Attempts int
 }
 
 func Initword() ([]string, string, string) {
@@ -62,4 +71,20 @@ func TabtoStr(tab []string) string {
 		str += string(ch)
 	}
 	return str
+}
+
+func SaveData(username string, mot string, tries int, attempts int) {
+	filename := "./score/score.json"
+	Data := DataHangman{Username: username, Mot: mot, Tries: tries, Attempts: attempts}
+	data, err := json.Marshal(Data)
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		file, err := os.OpenFile(filename, os.O_APPEND, 0644)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer file.Close()
+		file.WriteString(string(data))
+	}
 }

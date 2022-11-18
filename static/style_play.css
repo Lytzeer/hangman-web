@@ -17,6 +17,7 @@
 
   h2{
     text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
   
   .word{
@@ -31,6 +32,7 @@
     width: 20%;
     color:wheat;
     border: solid #FFBF00;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: #1F271B;
       padding-top: 10px;
       padding-bottom: 10px;
@@ -174,6 +176,7 @@
     left:0px;
     transition: all .6s ease;
     color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
   .wrapper input:focus + label span,
   .wrapper input:valid + label span{

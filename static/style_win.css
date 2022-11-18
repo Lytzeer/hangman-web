@@ -96,3 +96,19 @@ body{
   background-color: #1F271B;
   text-align: center;
 }
+
+.goose {
+  position: absolute;
+  width: 30%;
+  top: 0px;
+  margin-top: 0px;
+}
+
+.goose2{
+  position: absolute;
+  width: 30%;
+  top: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  right: 0px;
+}

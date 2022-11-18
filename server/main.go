@@ -16,8 +16,8 @@ func main() {
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 	http.HandleFunc("/user", HandlerUser)
-	http.HandleFunc("/win", HandleIndex)
-	http.HandleFunc("/loose", HandleIndex)
+	http.HandleFunc("/win", HandlerWin)
+	http.HandleFunc("/loose", HandlerLoose)
 	http.HandleFunc("/hangman", Handler)
 	http.HandleFunc("/reset", HandlerReset)
 	http.ListenAndServe(":8080", nil)
@@ -32,45 +32,14 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 	}
 	var tmpl *template.Template
 	if data.Win {
-		tmpl = template.Must(template.ParseFiles("./static/win.html"))
-		data.MotTab, data.Mot, data.Motstr = hw.Initword()
-		data.Attempts = 10
-		data.Win = false
-		data.LettersUsed = []string{}
-		data.LettersUsedStr = ""
-	} else if data.Attempts == 0 {
-		tmpl = template.Must(template.ParseFiles("./static/loose.html"))
-		data.MotTab, data.Mot, data.Motstr = hw.Initword()
-		data.Attempts = 10
-		data.LettersUsed = []string{}
-		data.LettersUsedStr = ""
+		http.Redirect(w, r, "/win", 302)
+		return
+	} else if data.Attempts <= 0 {
+		http.Redirect(w, r, "/loose", 302)
+		return
 	} else {
 		tmpl = template.Must(template.ParseFiles("./static/play.html"))
 	}
-	hang := ""
-	switch data.Attempts {
-	case 1:
-		hang = "/static/pics/9.png"
-	case 2:
-		hang = "/static/pics/8.png"
-	case 3:
-		hang = "/static/pics/7.png"
-	case 4:
-		hang = "/static/pics/6.png"
-	case 5:
-		hang = "/static/pics/5.png"
-	case 6:
-		hang = "/static/pics/4.png"
-	case 7:
-		hang = "/static/pics/3.png"
-	case 8:
-		hang = "/static/pics/2.png"
-	case 9:
-		hang = "/static/pics/111.png"
-	case 10:
-		hang = "/static/pics/11.png"
-	}
-	data.Hang = hang
 	tmpl.Execute(w, data)
 	return
 }
@@ -83,8 +52,31 @@ func HandlerUser(w http.ResponseWriter, r *http.Request) {
 
 func HandlerWin(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("./static/win.html"))
+	if r.Method == "POST" {
+		data.MotTab, data.Mot, data.Motstr = hw.Initword()
+		data.Attempts = 10
+		data.Tries = 0
+		data.Win = false
+		data.LettersUsed = []string{}
+		data.LettersUsedStr = ""
+		http.Redirect(w, r, "/", 302)
+	}
 	tmpl.Execute(w, nil)
 	return
+}
+
+func HandlerLoose(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("./static/loose.html"))
+	if r.Method == "POST" {
+		data.MotTab, data.Mot, data.Motstr = hw.Initword()
+		data.Attempts = 10
+		data.Tries = 0
+		data.Win = false
+		data.LettersUsed = []string{}
+		data.LettersUsedStr = ""
+		http.Redirect(w, r, "/", 302)
+	}
+	tmpl.Execute(w, nil)
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -116,6 +108,7 @@ func HangmanWeb() {
 	}
 	if data.Mot == data.Motstr || State == "wordgood" {
 		data.Win = true
+		hw.SaveData(data.Username, data.Mot, data.Tries, data.Attempts)
 	}
 }
 

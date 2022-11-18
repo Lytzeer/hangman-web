@@ -24,13 +24,13 @@
             </h3>
     </div>
     </div>
-    <img src={{ .Hang }}>
+    <img src="/static/pics/{{ .Attempts }}.png">
  <h1 class="word">
     {{ .Motstr }}
  </h1>
  <form method="post" action="/hangman">
     <div class="wrapper">
-        <input name="input" type="text" required >
+        <input name="input" type="text" required autofocus>
         <label for="input">
             <span>
                 Letter or Word
