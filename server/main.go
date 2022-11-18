@@ -19,6 +19,7 @@ func main() {
 	http.HandleFunc("/win", HandleIndex)
 	http.HandleFunc("/loose", HandleIndex)
 	http.HandleFunc("/hangman", Handler)
+	http.HandleFunc("/reset", HandlerReset)
 	http.ListenAndServe(":8080", nil)
 	return
 }
@@ -139,6 +140,21 @@ func LetterPresent(letter string) bool {
 		}
 	}
 	return false
+}
+
+func HandlerReset(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("./static/play.html"))
+	data.MotTab, data.Mot, data.Motstr = hw.Initword()
+	data.Attempts = 10
+	data.Tries = 0
+	data.Hang = ""
+	data.Win = false
+	data.LettersUsed = []string{}
+	fmt.Println(data.Mot)
+	fmt.Println(data.Attempts)
+	http.Redirect(w, r, "/", 302)
+	tmpl.Execute(w, data)
+	return
 }
 
 //Pour la carte d'identité faut rediriger depuis la fonction handler vers /http.HandleFunc("/hangman", Handler)
