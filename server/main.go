@@ -48,6 +48,30 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 	} else {
 		tmpl = template.Must(template.ParseFiles("./static/play.html"))
 	}
+	hang := ""
+	switch data.Attempts {
+	case 1:
+		hang = "/static/pics/9.png"
+	case 2:
+		hang = "/static/pics/8.png"
+	case 3:
+		hang = "/static/pics/7.png"
+	case 4:
+		hang = "/static/pics/6.png"
+	case 5:
+		hang = "/static/pics/5.png"
+	case 6:
+		hang = "/static/pics/4.png"
+	case 7:
+		hang = "/static/pics/3.png"
+	case 8:
+		hang = "/static/pics/2.png"
+	case 9:
+		hang = "/static/pics/1.png"
+	case 10:
+		hang = ""
+	}
+	data.Hang = hang
 	tmpl.Execute(w, data)
 	return
 }
