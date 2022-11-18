@@ -105,6 +105,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(data.Username)
 	} else {
 		data.Letter = variable
+		data.Tries++
 		fmt.Println(data.Username)
 	}
 	//data.LettersUsed = append(data.LettersUsed, variable)
@@ -117,13 +118,16 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 func HangmanWeb() {
 	Motstr, State := hc.IsInputOk(data.Letter, data.Mot, data.Motstr, &data.LettersUsed)
 	data.Motstr = Motstr
+	if State == "wordwrong" || State == "wordinvalid" {
+		data.Attempts -= 2
+	}
 	if !(LetterPresent(data.Letter)) {
 		data.LettersUsed = append(data.LettersUsed, data.Letter)
 	}
 	if State == "fail" {
 		data.Attempts--
 	}
-	if data.Mot == data.Motstr {
+	if data.Mot == data.Motstr || State == "wordgood" {
 		data.Win = true
 	}
 }

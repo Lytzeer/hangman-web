@@ -10,10 +10,17 @@
 </head>
 <body>
     <img src={{ .Hang }} >
+    <h3>Attempts:
+        {{ .Attempts }}
+     </h3>
+     <h3>Goes:
+        {{ .Tries }}
+     </h3>
  <h1>
     {{ .Motstr }}
-
  </h1>
+
+
  
 
  <form method="post" action="/hangman">
