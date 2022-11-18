@@ -69,7 +69,7 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 	case 9:
 		hang = "/static/pics/1.png"
 	case 10:
-		hang = ""
+		hang = "/static/pics/11.png"
 	}
 	data.Hang = hang
 	tmpl.Execute(w, data)
