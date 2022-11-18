@@ -37,15 +37,13 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 		data.Attempts = 10
 		data.Win = false
 		data.LettersUsed = []string{}
-		fmt.Println(data.Mot)
-		fmt.Println(data.Attempts)
+		data.LettersUsedStr = ""
 	} else if data.Attempts == 0 {
 		tmpl = template.Must(template.ParseFiles("./static/loose.html"))
 		data.MotTab, data.Mot, data.Motstr = hw.Initword()
 		data.Attempts = 10
 		data.LettersUsed = []string{}
-		fmt.Println(data.Mot)
-		fmt.Println(data.Attempts)
+		data.LettersUsedStr = ""
 	} else {
 		tmpl = template.Must(template.ParseFiles("./static/play.html"))
 	}
@@ -90,29 +88,17 @@ func HandlerWin(w http.ResponseWriter, r *http.Request) {
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	// switch r.Method {
-	// case "POST": // Gestion d'erreur
-	// 	if err := r.ParseForm(); err != nil {
-	// 		return
-	// 	}
-	// }
-	// Récupérez votre valeur
 	variable := r.FormValue("input")
-	fmt.Println(data.Mot)
-	//fmt.Println(variable)
-	// tmpl := template.Must(template.ParseFiles("./static/play.html"))
+	if len(variable) == 1 {
+		data.LettersUsedStr += variable
+	}
 	if data.Username == "" {
 		data.Username = variable
-		fmt.Println(data.Username)
 	} else {
 		data.Letter = variable
 		data.Tries++
-		fmt.Println(data.Username)
 	}
-	//data.LettersUsed = append(data.LettersUsed, variable)
-	fmt.Println(data.Motstr)
 	HangmanWeb()
-	// tmpl.Execute(w, data)
 	http.Redirect(w, r, "/", 302)
 }
 
@@ -150,11 +136,8 @@ func HandlerReset(w http.ResponseWriter, r *http.Request) {
 	data.Hang = ""
 	data.Win = false
 	data.LettersUsed = []string{}
-	fmt.Println(data.Mot)
-	fmt.Println(data.Attempts)
+	data.LettersUsedStr = ""
 	http.Redirect(w, r, "/", 302)
 	tmpl.Execute(w, data)
 	return
 }
-
-//Pour la carte d'identité faut rediriger depuis la fonction handler vers /http.HandleFunc("/hangman", Handler)

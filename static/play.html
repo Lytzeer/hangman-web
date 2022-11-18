@@ -11,22 +11,23 @@
 <body> 
     <div class="container">
         <div class="scoreboard">
+            <h2>Scoreboard</h2>
             <h3>Attempts:
                 {{ .Attempts }}
             </h3>
             <h3>Goes:
                 {{ .Tries }}
             </h3>
+            <h3>
+                Letters Used : 
+                {{ .LettersUsedStr }}
+            </h3>
     </div>
     </div>
     <img src={{ .Hang }}>
- <h1>
+ <h1 class="word">
     {{ .Motstr }}
  </h1>
-
-
- 
-
  <form method="post" action="/hangman">
     <div class="wrapper">
         <input name="input" type="text" required >

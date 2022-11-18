@@ -9,16 +9,17 @@ import (
 )
 
 type Hangman struct {
-	Username    string
-	Letter      string
-	MotTab      []string
-	Motstr      string
-	Mot         string
-	Attempts    int
-	LettersUsed []string
-	Win         bool
-	Hang        string
-	Tries       int
+	Username       string
+	Letter         string
+	MotTab         []string
+	Motstr         string
+	Mot            string
+	Attempts       int
+	LettersUsed    []string
+	LettersUsedStr string
+	Win            bool
+	Hang           string
+	Tries          int
 }
 
 func Initword() ([]string, string, string) {

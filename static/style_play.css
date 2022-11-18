@@ -14,8 +14,12 @@
     left:0;
     top:0;
   }
+
+  h2{
+    text-align: center;
+  }
   
-  h1{
+  .word{
     color: #1F271B;
     font-size: 9.5rem;
     font-weight: bold;
@@ -24,7 +28,7 @@
   }
 
   .scoreboard{
-    width: 12%;
+    width: 20%;
     color:wheat;
     border: solid #FFBF00;
     background-color: #1F271B;
@@ -51,14 +55,19 @@
     outline-offset: 0;
   }
 
-  .btn-holder,.wrapper,h1 {
+  .wrapper,h1{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 1000px;
     margin: 10px auto 35px;
     margin-top: 10%;
-    padding: 1.5%;
+  }
+
+  .btn-holder{
+    display: flex;
+    flex-wrap: wrap;
+    align-items:flex-end;
   }
 
   
