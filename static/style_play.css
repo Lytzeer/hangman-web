@@ -23,14 +23,31 @@
     letter-spacing: 1rem;
   }
 
-  :active, :hover, :focus {
-    outline: 0!important;
-    outline-offset: 0;
+  .scoreboard{
+    width: 12%;
+    color:wheat;
+    background-color: #1F271B;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-right: 5px;
+      padding-left: 5px;
   }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
   ::before,
   ::after {
     position: absolute;
     content: "";
+  }
+
+  :active, :hover, :focus {
+    outline: 0!important;
+    outline-offset: 0;
   }
 
   .btn-holder,.wrapper,h1 {
@@ -39,8 +56,10 @@
     justify-content: center;
     max-width: 1000px;
     margin: 10px auto 35px;
-    margin-top: 10%;
+    margin-top: 9%;
   }
+
+  
   .btn {
     position: relative;
     display: inline-block;

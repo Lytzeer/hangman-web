@@ -8,14 +8,18 @@
     <link rel="shortcut icon" type="image/png" href="/static/pics/fav_icon.png"/>
     <title>Hangman Web</title>
 </head>
-<body>
+<body> 
+    <div class="container">
+        <div class="scoreboard">
+            <h3>Attempts:
+                {{ .Attempts }}
+            </h3>
+            <h3>Goes:
+                {{ .Tries }}
+            </h3>
+    </div>
+    </div>
     <img src={{ .Hang }} >
-    <h3>Attempts:
-        {{ .Attempts }}
-     </h3>
-     <h3>Goes:
-        {{ .Tries }}
-     </h3>
  <h1>
     {{ .Motstr }}
  </h1>
