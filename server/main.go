@@ -35,12 +35,14 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 		data.MotTab, data.Mot, data.Motstr = hw.Initword()
 		data.Attempts = 10
 		data.Win = false
+		data.LettersUsed = []string{}
 		fmt.Println(data.Mot)
 		fmt.Println(data.Attempts)
 	} else if data.Attempts == 0 {
 		tmpl = template.Must(template.ParseFiles("./static/loose.html"))
 		data.MotTab, data.Mot, data.Motstr = hw.Initword()
 		data.Attempts = 10
+		data.LettersUsed = []string{}
 		fmt.Println(data.Mot)
 		fmt.Println(data.Attempts)
 	} else {
