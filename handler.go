@@ -59,7 +59,7 @@ func HandlerLoose(w http.ResponseWriter, r *http.Request) {
 		data.LettersUsedStr = ""
 		http.Redirect(w, r, "/", 302)
 	}
-	tmpl.Execute(w, nil)
+	tmpl.Execute(w, data)
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {

@@ -112,3 +112,10 @@ body{
   margin-right: 0px;
   right: 0px; 
 }
+
+.tofindloose{
+  text-align: center;
+  color: white;
+  font-size: 1rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
