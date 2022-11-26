@@ -70,19 +70,3 @@ func TabtoStr(tab []string) string {
 	}
 	return str
 }
-
-// func SaveData(username string, mot string, tries int, attempts int) {
-// 	filename := "./score/score.json"
-// 	Data := DataHangman{Username: username, Mot: mot, Tries: tries, Attempts: attempts}
-// 	data, err := json.Marshal(Data)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	} else {
-// 		file, err := os.OpenFile(filename, os.O_APPEND, 0644)
-// 		if err != nil {
-// 			log.Fatal(err)
-// 		}
-// 		defer file.Close()
-// 		file.WriteString(string(data))
-// 	}
-// }

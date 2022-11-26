@@ -1,6 +1,11 @@
 package hangmanweb
 
-import hc "hangmanweb/hangman-classic"
+import (
+	"encoding/json"
+	hc "hangmanweb/hangman-classic"
+	"log"
+	"os"
+)
 
 func HangmanWeb() {
 	Motstr, State := hc.IsInputOk(data.Letter, data.Mot, data.Motstr, &data.LettersUsed)
@@ -16,7 +21,7 @@ func HangmanWeb() {
 	}
 	if data.Mot == data.Motstr || State == "wordgood" {
 		data.Win = true
-		//SaveData(data.Username, data.Mot, data.Tries, data.Attempts)
+		SaveData(data.Username, data.Mot, data.Tries, data.Attempts)
 	}
 }
 
@@ -36,4 +41,21 @@ func LetterPresentStr(word, letter string) bool {
 		}
 	}
 	return false
+}
+
+func SaveData(username string, mot string, tries int, attempts int) {
+	filename := "./scoreboard/score.txt"
+	Data := DataHangman{Username: username, Mot: mot, Tries: tries, Attempts: attempts}
+	data, err := json.Marshal(Data)
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		file, err := os.OpenFile(filename, os.O_APPEND, 0644)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer file.Close()
+		file.Write(data)
+		file.Write([]byte("\n"))
+	}
 }

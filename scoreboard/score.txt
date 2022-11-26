@@ -1,0 +1,2 @@
+{"Username":"moi","Mot":"fenêtre","Tries":1,"Attempts":10}
+{"Username":"moi","Mot":"yankee","Tries":15,"Attempts":1}
